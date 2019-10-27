@@ -21,13 +21,22 @@ public class Main extends Application {
 
         Pane canvas = new Pane();
         Scene scene = new Scene(canvas, 300, 300, Color.ALICEBLUE);
-        Ball ball1 = new Ball (Color.CADETBLUE, 3, 110);
-        Ball ball2 = new Ball (Color.RED, 200, 30);
+        Ball ball1 = new Ball (Color.CADETBLUE, 20, 20);
+        Ball ball2 = new Ball (Color.RED, 70, 20);
         ball2.setDiameter(4.0);
+        Ball ball3 = new Ball (Color.GREEN, 110, 110);
+        ball3.setDiameter(4.0);
+        Ball ball4 = new Ball (Color.PURPLE, 20, 200);
+        ball3.setDiameter(7.0);
+
+        System.out.println("test 1: " + ball1.intersectsWith(ball2));
+        System.out.println("test 2: " + ball3.intersectsWith(ball4));
 
         //get a better name for "get.circle method"
         canvas.getChildren().add(ball1.getCircle());
         canvas.getChildren().add(ball2.getCircle());
+        canvas.getChildren().add(ball3.getCircle());
+        canvas.getChildren().add(ball4.getCircle());
 
         stage.setTitle("Animated Ball");
         stage.setScene(scene);
@@ -44,39 +53,32 @@ public class Main extends Application {
                         //Keeping the bounds within event handler enable them to be re-calibrated each frame
                         //should the view pane be re-sized.
 
-                        //start with 2 ball for the bouncing off! Could get very complex!
-
-                        //IT HAS TO BE CALCULATED UNTIL NO OVER LAPS
-                        // - Need a loop? Could get complex as change in a causes changes > b > c, then c causes a
-                        // (but then change could revert original..... :-0)
-                        // the final position of a preceding ball needs to be FINAL
-                        //
                         //"Dominance level", set on order (or more cleverly diameter/weight)
                             //Could have smaller's speed up on impact with bigger and biggers slow down?
                             //
 
-
-                        //NEED A CONTINUE FLAG?
                         Bounds bounds = canvas.getBoundsInLocal();
 
-                        //class level array/arraylist to hold all balls
-                        //iterate through them each time to find the other values each time..
-
-                        // balls input - array? Maybe arrayList but that only needed
-                        // for dynamic input, maybe thats phase 2?
-
                         //move function ()
+                        //System.out.println("X: " +ball1.getX());
+                        //System.out.println("Y: " +ball1.getX());
                         ball1.moveX(bounds.getMinX(), bounds.getMaxX());
                         ball1.moveY(bounds.getMinY(), bounds.getMaxY());
 
                         ball2.moveX(bounds.getMinX(), bounds.getMaxX());
                         ball2.moveY(bounds.getMinY(), bounds.getMaxY());
+
+                        ball3.moveX(bounds.getMinX(), bounds.getMaxX());
+                        ball3.moveY(bounds.getMinX(), bounds.getMaxX());
+
+                        ball4.moveX(bounds.getMinX(), bounds.getMaxX());
+                        ball4.moveY(bounds.getMinX(), bounds.getMaxX());
                     }
                 }));
 
 
         timeline.setCycleCount(Timeline.INDEFINITE);
-        //timeline.setCycleCount(5);
+        //timeline.setCycleCount(1);
         timeline.play();
 
     }
